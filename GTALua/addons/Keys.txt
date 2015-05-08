@@ -1,0 +1,11 @@
+Key List:
+
+* Motherlord All - Numpad 0
+* Achievements | Numpad 1
+* Appearance | Numpad 7
+* ArmoredMunchies | Numpad 9
+* BadSport | Numpad 4
+* Leveler | Numpad 5
+* PlayTime | Numpad 6
+* RPGenFix | Numpad 3
+	
