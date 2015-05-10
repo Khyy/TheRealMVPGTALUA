@@ -108,6 +108,14 @@ natives.STATS.STAT_SET_INT(natives.GAMEPLAY.GET_HASH_KEY("MPPLY_TOTAL_DEATHMATCH
 natives.STATS.STAT_SET_INT(natives.GAMEPLAY.GET_HASH_KEY("MPPLY_TOTAL_RACES_LOST"), 36, true)
 natives.STATS.STAT_SET_INT(natives.GAMEPLAY.GET_HASH_KEY("MPPLY_TOTAL_RACES_WON"), 101, true)
 natives.STATS.STAT_SET_INT(natives.GAMEPLAY.GET_HASH_KEY("MPPLY_TOTAL_TDEATHMATCH_WON"), 63, true)
+--
+natives.STATS.STAT_SET_INT(natives.GAMEPLAY.GET_HASH_KEY("MP" .. playerPedId[i] .. "_SCRIPT_INCREASE_STAM"), 100, true)
+natives.STATS.STAT_SET_INT(natives.GAMEPLAY.GET_HASH_KEY("MP" .. playerPedId[i] .. "_SCRIPT_INCREASE_STRN"), 100, true)
+natives.STATS.STAT_SET_INT(natives.GAMEPLAY.GET_HASH_KEY("MP" .. playerPedId[i] .. "_SCRIPT_INCREASE_LUNG"), 100, true)
+natives.STATS.STAT_SET_INT(natives.GAMEPLAY.GET_HASH_KEY("MP" .. playerPedId[i] .. "_SCRIPT_INCREASE_DRIV"), 100, true)
+natives.STATS.STAT_SET_INT(natives.GAMEPLAY.GET_HASH_KEY("MP" .. playerPedId[i] .. "_SCRIPT_INCREASE_FLY"), 100, true)
+natives.STATS.STAT_SET_INT(natives.GAMEPLAY.GET_HASH_KEY("MP" .. playerPedId[i] .. "_SCRIPT_INCREASE_SHO"), 100, true)
+natives.STATS.STAT_SET_INT(natives.GAMEPLAY.GET_HASH_KEY("MP" .. playerPedId[i] .. "_SCRIPT_INCREASE_STL"), 100, true)
 
 -- Bad Sport Shit
 natives.STATS.STAT_SET_INT(natives.GAMEPLAY.GET_HASH_KEY("MP" .. playerPedId[i] .. "_BAD_SPORT_BITSET"), 0, true)
