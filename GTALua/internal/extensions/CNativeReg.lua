@@ -10,12 +10,30 @@ function CNativeReg:HasCallLayout()
 	return self.m_bHasCallLayout
 end
 
+-- Exceptions
+function type_exception_check(type_char, should_type, actual_type, value)
+	-- number: 0/1 for bools
+	if should_type == "number" and actual_type == "boolean" and (value == 1 or value == 0) then
+		type_char = "b"
+		should_type = "boolean"
+	end
+	
+	-- unknown/any/int & CMemoryBlock
+	if (type_char == "a" or type_char == "u" or type_char == "i") and actual_type == "CMemoryBlock" then
+		type_char = "m"
+		should_type = "CMemoryBlock"
+	end
+	
+	-- no exception
+	return type_char, should_type, value
+end
+
 -- Call Native by Call Layout
 function CNativeReg:__call(...)
-	local _err = "CNativeReg:Call ["..self.m_sCategory.."/"..self.m_sName.."] "
+	local _err = "CNativeReg:Call ["..self.m_sCategory.."/"..self.m_sName.."]: "
 
 	-- check call layout
-	if not self.m_bHasCallLayout then
+	if not self.m_bHasCallLayout or self.m_sCallLayout == nil then
 		error(_err .. "Native doesn't have a Call Layout!")
 	end
 	
@@ -44,9 +62,17 @@ function CNativeReg:__call(...)
 		if type_char == ")" then
 			parsing_return_values = true
 		else
+			-- exception check
+			type_char, c_type, arg = type_exception_check(type_char, c_type, type(arg), arg)
+		
 			-- type check
 			if not parsing_return_values and c_type ~= type(arg) then
 				error(_err .. "Argument type mismatch (index "..i.." - got "..type(arg).." expected "..c_type..")")
+			end
+			
+			-- CMemoryBlock check
+			if c_type == "CMemoryBlock" and not arg:IsValid() then
+				error(_err .. "Argument index "..i.." is an invalid CMemoryBlock!")
 			end
 			
 			-- process
@@ -80,6 +106,8 @@ function CNativeReg:__call(...)
 			scripthookv.NativePushVector(value)
 		elseif c_type == "boolean" then
 			scripthookv.NativePushBool(value == true)
+		elseif c_type == "CMemoryBlock" then
+			scripthookv.NativePushMemoryBlock(value)
 		end
 	end
 	
